@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {padding: 0px; margin:0px;}
+        
+        /* 布局 */
+        .Main { width: 600px; height: 800px; text-align: center;border: rgb(0, 255, 76) 3px solid;}
+        .TopBar { height: 100px; line-height: 100px; color: rgb(224, 112, 20); font-size: 40px;} 
+        .Quiz { height: 150px; line-height: 150px; color: rgb(35, 35, 185); font-size: 60px;}
+        .Play { height: 500px; }
+        
+        /* 按钮 */
+        button { width: 100px; height: 100px; background: no-repeat; background-size: contain; border-style: none; }
+        button#b1{ background-image: url("images/number1.png"); }
+        button#b2{ background-image: url("images/number2.png"); }
+        button#b3{ background-image: url("images/number3.png"); }
+        button#b4{ background-image: url("images/number4.png"); }
+        button#b5{ background-image: url("images/number5.png"); }
+        button#b6{ background-image: url("images/number6.png"); }
+        button#b7{ background-image: url("images/number7.png"); }
+        button#b8{ background-image: url("images/number8.png"); }
+        button#b9{ background-image: url("images/number9.png"); }
+        button#b0{ background-image: url("images/number0.png"); }
+        button#enter{ background-image: url(images/enter.png);}
+        button:active { box-shadow: 0 5px #666; transform:translateY(4px)}
+        button:focus { outline:none}
+        
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="Main">
+        <div class="TopBar" id="message">Quiz Starts!</div>
+        <div class="Quiz" id="Question">3 + 2 = ?</div>
+        <script>
+           userInput = "";
+            newQuiz();
+            function newQuiz() {
+                left = Math.floor((Math.random()*20+1));
+                right = Math.floor((Math.random()*20+1));
+                document.getElementById("Question").innerHTML = left +"+"+ right +"=" + "?";
+            }
+            function checkAnswer() {
+                var num = Number(userInput);
+                var answer = left + right;
+                if (num == answer){
+                    document.getElementById("message").innerHTML = "<span style='color: green;'>Good!</span>";
+                    newQuiz();  
+                    userInput="";
+                }else{
+                    document.getElementById("message").innerHTML = "<span style='color: red;'>Sorry,Wrong</span>";
+                    userInput="";
+                }
+                
+            }
+            function buttonPressed(id) {
+                var num = Number(id.toString()[1]);
+                userInput = userInput + num;
+                document.getElementById("Question").innerHTML = left +"+"+ right +"=" + userInput;
+            }
+        </script>
+        <div class="Play">
+            <button onclick="buttonPressed(this.id)" id="b1"></button><button onclick="buttonPressed(this.id)" id="b2"></button><button onclick="buttonPressed(this.id)" id="b3"></button><br>
+            <button onclick="buttonPressed(this.id)" id="b4"></button><button onclick="buttonPressed(this.id)" id="b5"></button><button onclick="buttonPressed(this.id)" id="b6"></button><br>
+            <button onclick="buttonPressed(this.id)" id="b7"></button><button onclick="buttonPressed(this.id)" id="b8"></button><button onclick="buttonPressed(this.id)" id="b9"></button><br>
+            <button onclick="buttonPressed(this.id)" id="b0"></button><button onclick="checkAnswer()" id="enter"></button>
+        </div>
+ 
+    </div>
+</body>
+</html>
